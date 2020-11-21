@@ -61,7 +61,14 @@
 			{
 				"name": "Copy to File",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -76,12 +83,43 @@
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "outputSQL",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"tableName": "clients"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Inputcsv",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "clientsbkp1"
+						}
 					}
 				]
 			}
