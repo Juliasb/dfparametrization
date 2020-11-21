@@ -1,0 +1,7 @@
+{
+	"name": "Copy Data",
+	"properties": {
+		"description": "csv to sql",
+		"annotations": []
+	}
+}
