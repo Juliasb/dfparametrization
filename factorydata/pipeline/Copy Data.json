@@ -118,7 +118,10 @@
 						"referenceName": "Inputcsv",
 						"type": "DatasetReference",
 						"parameters": {
-							"filename": "clientsbkp1"
+							"filename": {
+								"value": "@concat('clients-',utcnow(),'.csv')",
+								"type": "Expression"
+							}
 						}
 					}
 				]
