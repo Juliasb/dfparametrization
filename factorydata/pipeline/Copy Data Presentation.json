@@ -52,7 +52,7 @@
 						"referenceName": "outputSQLStaticFile",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableNameStatic": "clients.csv"
+							"TableNameStatic": "clients"
 						}
 					}
 				]
