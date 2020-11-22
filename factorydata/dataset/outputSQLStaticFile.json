@@ -5,6 +5,12 @@
 			"referenceName": "OutputSQLdatabase",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"TableNameStatic": {
+				"type": "string",
+				"defaultValue": "clients"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
@@ -35,7 +41,10 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "clients"
+			"table": {
+				"value": "@dataset().TableNameStatic",
+				"type": "Expression"
+			}
 		}
 	}
 }
