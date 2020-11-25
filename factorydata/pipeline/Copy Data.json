@@ -4,7 +4,7 @@
 		"description": "csv to sql",
 		"activities": [
 			{
-				"name": "Copy table",
+				"name": "Copy data1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,115 +16,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "Inputcsv",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": "clients.csv"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "outputSQL",
-						"type": "DatasetReference",
-						"parameters": {
-							"tableName": "clients"
-						}
-					}
-				]
-			},
-			{
-				"name": "Copy to File",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Copy table",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "outputSQL",
-						"type": "DatasetReference",
-						"parameters": {
-							"tableName": "clients"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "Inputcsv",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@concat('clients-',utcnow(),'.csv')",
-								"type": "Expression"
-							}
-						}
-					}
-				]
+					"enableStaging": false
+				}
 			}
 		],
 		"annotations": []
