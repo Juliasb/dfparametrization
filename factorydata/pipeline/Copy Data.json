@@ -16,8 +16,47 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Inputcsv",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": "cars.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "outputSQL",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": "cars"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []
