@@ -44,7 +44,7 @@
 						"referenceName": "Inputcsv",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "cars.csv"
+							"FileName": "clients.csv"
 						}
 					}
 				],
@@ -53,7 +53,7 @@
 						"referenceName": "outputSQL",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableName": "cars"
+							"TableName": "clients"
 						}
 					}
 				]
